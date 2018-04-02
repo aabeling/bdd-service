@@ -13,17 +13,21 @@ import org.jbehave.core.steps.CandidateSteps;
 import org.jbehave.core.steps.InjectableStepsFactory;
 import org.jbehave.core.steps.InstanceStepsFactory;
 import org.jbehave.core.steps.StepCandidate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import de.banapple.bddservice.beans.Container;
 import de.banapple.bddservice.beans.Step;
 import de.banapple.bddservice.beans.Step.StepType;
-import de.banapple.bddservice.jbehave.steps.TraderSteps;
+import de.banapple.bddservice.jbehave.StepsProvider;
 
 @Component
 @Path("/steps")
 public class StepsController {
 
+    @Autowired
+    StepsProvider stepsProvider;
+    
     @GET
     @Produces("application/json")
     public Container<Step> getAllSteps() {
@@ -59,6 +63,6 @@ public class StepsController {
 
         return new InstanceStepsFactory(
                 new MostUsefulConfiguration(),
-                new TraderSteps());
+                stepsProvider.getStepsInstances());
     }
 }

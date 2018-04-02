@@ -30,18 +30,22 @@ import org.jbehave.core.steps.ParameterControls;
 import org.jbehave.core.steps.ParameterConverters;
 import org.jbehave.core.steps.ParameterConverters.DateConverter;
 import org.jbehave.core.steps.ParameterConverters.ExamplesTableConverter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import de.banapple.bddservice.beans.StoryExecutionRequest;
 import de.banapple.bddservice.beans.StoryExecutionResponse;
 import de.banapple.bddservice.jbehave.CollectingStoryReporter;
+import de.banapple.bddservice.jbehave.StepsProvider;
 import de.banapple.bddservice.jbehave.StringStoryLoader;
-import de.banapple.bddservice.jbehave.steps.TraderSteps;
 
 @Component
 @Path("/stories")
 public class StoryController {
 
+    @Autowired
+    StepsProvider stepsProvider;
+    
     @POST
     @Produces("application/json")
     @Consumes("application/json")
@@ -112,6 +116,6 @@ public class StoryController {
 
         return new InstanceStepsFactory(
                 configuration,
-                new TraderSteps());
+                stepsProvider.getStepsInstances());
     }
 }

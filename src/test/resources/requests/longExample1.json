@@ -1,0 +1,8 @@
+{
+	"id": "longExample1",
+	"storyLines": [
+	  "Given some short operation",
+	  "When some long operation",
+	  "Then another long operation"
+	]
+}

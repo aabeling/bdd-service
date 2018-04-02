@@ -2,6 +2,7 @@ package de.banapple.bddservice.beans;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Date;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -10,10 +11,19 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 public class StoryReportItem {
 
+    private Date date;
     private String type;
     private String step;
     private String cause;
 
+    public Date getDate() {
+        return date;
+    }
+    
+    public void setDate(Date date) {
+        this.date = date;
+    }
+    
     public String getType() {
         return type;
     }
