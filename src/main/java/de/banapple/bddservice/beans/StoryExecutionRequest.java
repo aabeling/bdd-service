@@ -8,17 +8,17 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public class StoryExecutionRequest {
 
     private String id;
-    private String story;
+    private String[] storyLines;
 
     public StoryExecutionRequest() {
         
         /* intentionally left blank */
     }
     
-    public StoryExecutionRequest(String id, String story) {
+    public StoryExecutionRequest(String id, String... storyLines) {
         
         this.id = id;
-        this.story = story;
+        this.storyLines = storyLines;
     }
 
     public String getId() {
@@ -29,12 +29,12 @@ public class StoryExecutionRequest {
         this.id = id;
     }
 
-    public String getStory() {
-        return story;
+    public String[] getStoryLines() {
+        return storyLines;
     }
 
-    public void setStory(String story) {
-        this.story = story;
+    public void setStoryLines(String[] storyLines) {
+        this.storyLines = storyLines;
     }
 
     @Override

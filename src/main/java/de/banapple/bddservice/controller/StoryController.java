@@ -9,6 +9,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.configuration.MostUsefulConfiguration;
 import org.jbehave.core.embedder.Embedder;
@@ -49,7 +50,7 @@ public class StoryController {
 
         CollectingStoryReporter reporter = new CollectingStoryReporter();
         Configuration configuration = jbehaveConfiguration(
-                request.getStory(),
+                request.getStoryLines(),
                 reporter);
 
         EmbedderControls embedderControls = new EmbedderControls();
@@ -70,13 +71,15 @@ public class StoryController {
     }
 
     private Configuration jbehaveConfiguration(
-            final String story,
+            final String[] storyLines,
             final StoryReporter reporter) {
 
         Properties viewResources = new Properties();
         viewResources.put("decorateNonHtml", "true");
         ParameterConverters parameterConverters = new ParameterConverters();
 
+        String story = StringUtils.join(storyLines,"\n");
+        
         ExamplesTableFactory examplesTableFactory = new ExamplesTableFactory(
                 new LocalizedKeywords(),
                 new LoadFromClasspath(this.getClass()),
